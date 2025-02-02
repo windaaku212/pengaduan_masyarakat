@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         // Relasi Pengaduan ke table kategori dan Users
-        schema::table('pengaduan', function(blueprint $table){
+        schema::table('pengaduans', function(Blueprint $table){
             $table->foreign('kategori_id')->references('id')->on('kategoripengaduan')->onUpdateCascade()->onDeleteCascade();
             $table->foreign('masyarakat_id')->references('id')->on('users')->onUpdateCascade()->onDeleteCascade();
         });
 
         // Relasi Tanggapan ke Pengaduan dan Users
-        schema::table('tanggapan', function(blueprint $table){
+        schema::table('tanggapans', function(Blueprint $table){
        $table->foreign('users_id')->references('id')->on('users')->onUpdateCascade()->onDeleteCascade();
        $table->foreign('pengaduan_id')->references('id')->on('pengaduan')->onUpdateCascade()->onDeleteCascade();
 
