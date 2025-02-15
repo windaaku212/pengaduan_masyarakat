@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('pengaduans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('masyarakat_id');
-            $table->unsignedBigInteger('kategori_id');
+            $table->unsignedBigInteger('user_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedBigInteger('kategori_id')->constrained('kategori')->onDelete('cascade');
             $table->date('tanggal_pengaduan');
+            $table->text('judul_pengaduan');
             $table->text('isi_pengaduan');
             $table->text('foto');
-            $table->enum('status',['New','Proces','Selesai','Ditolak']);
+            $table->enum('status',['Baru','Proses','Selesai','Ditolak']);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengaduan');
+        Schema::dropIfExists('pengaduans');
     }
 };

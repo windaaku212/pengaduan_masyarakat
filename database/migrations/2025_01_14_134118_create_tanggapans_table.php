@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tanggapans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('masyarakat_id');
-            $table->unsignedBigInteger('pengaduan_id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('pengaduan_id')->constrained('pengaduans')->oneDelete('cascade');
             $table->date('tanggal_tanggapan');
             $table->text('tanggapan');
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tanggapan');
+        Schema::dropIfExists('tanggapans');
     }
 };
